@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Tetris.Maui.View.GamePage"
+             Title="Tetris">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="FieldStyle" TargetType="Button">
+                <Style.Triggers>
+                    <DataTrigger TargetType="Button" Binding="{Binding Id}" Value="0">
+                        <Setter Property="Background" Value="Black" />
+                    </DataTrigger>
+                    <DataTrigger TargetType="Button" Binding="{Binding Id}" Value="1">
+                        <Setter Property="Background" Value="Cyan" />
+                    </DataTrigger>
+                    <DataTrigger TargetType="Button" Binding="{Binding Id}" Value="2">
+                        <Setter Property="Background" Value="Blue" />
+                    </DataTrigger>
+                    <DataTrigger TargetType="Button" Binding="{Binding Id}" Value="3">
+                        <Setter Property="Background" Value="Orange" />
+                    </DataTrigger>
+                    <DataTrigger TargetType="Button" Binding="{Binding Id}" Value="4">
+                        <Setter Property="Background" Value="Yellow" />
+                    </DataTrigger>
+                    <DataTrigger TargetType="Button" Binding="{Binding Id}" Value="5">
+                        <Setter Property="Background" Value="Green" />
+                    </DataTrigger>
+                    <DataTrigger TargetType="Button" Binding="{Binding Id}" Value="6">
+                        <Setter Property="Background" Value="Purple" />
+                    </DataTrigger>
+                    <DataTrigger TargetType="Button" Binding="{Binding Id}" Value="7">
+                        <Setter Property="Background" Value="Red" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Button Text="Új játék" Command="{Binding NewGameCommand}" Grid.Row="0" HorizontalOptions="Start" />
+
+        <Grid
+            BindableLayout.ItemsSource="{Binding Fields}"
+            Grid.Row="1"
+            RowDefinitions="{Binding RowDefinitions}"
+            ColumnDefinitions="{Binding ColumnDefinitions}">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate>
+                    <Button
+                        Style="{StaticResource FieldStyle}"
+                        Grid.Row="{Binding X}"
+                        Grid.Column="{Binding Y}"
+                        VerticalOptions="FillAndExpand"
+                        HorizontalOptions="FillAndExpand" />
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </Grid>
+
+    </Grid>
+</ContentPage>
